@@ -47,9 +47,7 @@ exports.updateContact=(req,res)=> {
   let contact = JSON.parse(fs.readFileSync('contactData.json')).find(singleid=> singleid.id===id)
   contact.name = name
   contact.number = number
-  fs.writeFile('contactData.json', JSON.stringify(contact, null, 2), function(err, result) {
-    if(err) console.log('error', err);
-  });
+  fs.rename
   console.log(contact)
   res.json(contact)
 }
@@ -57,6 +55,12 @@ exports.updateContact=(req,res)=> {
 exports.deleteContact=(req,res)=> {
   let {id} = req.params
   id= parseInt(id)
-  let contact = JSON.parse(fs.readFileSync('contactData.json')).filter(singleid=> singleid.id===id)
+  let contact = JSON.parse(fs.readFileSync('contactData.json')).filter(singleid=> singleid.id==id)
+  
+  if (contact.id > -1) {
+    JSON.parse(fs.readFileSync('contactData.json')).slice(contact);
+  }
+  console.log(JSON.parse(fs.readFileSync('contactData.json')))
+ 
   res.json(contact)
 }
