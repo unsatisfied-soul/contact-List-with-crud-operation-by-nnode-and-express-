@@ -1,11 +1,13 @@
 const contacts = require('./contacts')
 const fs = require('fs')
 
+//get the contact
 exports.getContact=(req,res)=> {
     const fileData = JSON.parse(fs.readFileSync('contactData.json'))
     res.json(fileData)
 }
 
+//create contact in array
 exports.createContact=(req,res)=> {
     let {name,number}= req.body 
     let contact =contacts.push(
@@ -32,6 +34,8 @@ exports.createContact=(req,res)=> {
       });
 }
 
+
+//single contact find by id
 exports.getSingleContact=(req,res)=> {
   let {id} = req.params
   id= parseInt(id)
